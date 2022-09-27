@@ -1,0 +1,426 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: rgb(var(--white));
+  font-size: 14px;
+  position: relative;
+}
+
+.App h1,
+.App h2 {
+  text-align: left;
+  margin-left: 16px;
+}
+
+nav {
+  text-align: left;
+  font-size: 16px;
+}
+
+:root {
+  --max-content-width: 1200px;
+  --column-spacing: 20px;
+  --section-spacing-vertical: 24px;
+  --block-spacing-vertical: 16px;
+  --trasparent-pink: rgba(253, 171, 185, 0.363);
+  --red: hsl(0, 100%, 75%);
+  --blue: hsl(203, 92%, 75%);
+  --yellow: hsl(34, 97%, 66%);
+  --purple: hsl(256, 92%, 80%);
+  --green: hsl(120, 74%, 70%);
+  --white: 255, 255, 255;
+  --black: 0, 0, 0;
+}
+
+/* utility classes */
+
+.maxContentWidthAndGutters {
+  position: relative;
+  max-width: var(--max-content-width);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.maxContentWidth {
+  max-width: calc(var(--max-content-width) + (var(--column-spacing) * 2));
+}
+
+.gutters {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.maxContentWidthAndGutters > * {
+  margin-left: var(--column-spacing);
+  margin-right: var(--column-spacing);
+  max-width: var(--max-content-width);
+}
+
+.maxContentWidth > * {
+  max-width: var(--max-content-width);
+}
+
+.gutters > * {
+  margin-left: var(--column-spacing);
+  margin-right: var(--column-spacing);
+}
+
+.fullHeight {
+  min-height: 100%;
+  padding-bottom: 75px;
+}
+
+/* baseline grid underlay */
+.underlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.underlay > .maxContentWidth {
+  margin-top: var(--section-spacing-vertical);
+}
+
+#baselineGrid {
+  display: grid;
+  column-gap: var(--column-spacing);
+  margin: 0px var(--column-spacing);
+
+  position: absolute;
+  height: 100%;
+  width: calc(100% - (var(--column-spacing) * 2));
+}
+
+#baselineGrid .column {
+  background-color: var(--trasparent-pink);
+}
+
+#baselineGrid .column p {
+  margin: 8px 0;
+}
+
+#baselineGrid p.widthOuput span {
+  background-color: transparent;
+}
+
+.layout .note {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 8px 0;
+  background-color: rgba(var(--white), 0.6);
+  color: rgb(var(--black));
+  font-size: 12px;
+  border-top: 1px dotted black;
+  max-width: var(--max-content-width);
+}
+
+/* layout components */
+.layout {
+  position: relative;
+  top: 36px;
+}
+
+.layout.debug {
+  top: 100px;
+}
+
+.layout > * {
+  margin-bottom: var(--section-spacing-vertical);
+}
+
+.section {
+  position: relative;
+  padding: 0;
+  background-color: var(--green);
+}
+
+.section.floating {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 99;
+  width: 100%;
+  border: 2px solid rgba(var(--black), 0.4);
+  box-sizing: border-box;
+  box-shadow: 0px -5px 10px 0px rgba(var(--black), 0.3);
+}
+
+.section > * {
+  margin-bottom: 16px;
+}
+
+.section > p {
+  margin: 0;
+}
+
+p span {
+  background-color: rgba(var(--white), 0.7);
+  padding: 2px 6px;
+}
+
+.section .label {
+  padding: 1px 0;
+  display: block;
+  margin-bottom: 0px;
+}
+
+.section.singleColumn {
+  width: 100%;
+}
+
+/* layout grid */
+.layoutGrid {
+  max-width: var(--max-content-width);
+  display: grid;
+  column-gap: var(--column-spacing);
+  row-gap: var(--block-spacing-vertical);
+  grid-auto-flow: row;
+  /* background-color: rgba(252, 252, 252, 0.1); */
+  opacity: 1;
+  position: relative;
+  background-size: 8px 8px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(169, 169, 169, 0.5) 0,
+    rgba(169, 169, 169, 0.5) 0.8px,
+    rgba(252, 252, 252, 0) 0,
+    rgba(252, 252, 252, 0) 50%
+  );
+}
+
+.layoutGridItem {
+  background-color: rgba(var(--white), 0.15);
+}
+
+.layoutGridItem .section {
+  background: none;
+}
+
+.layoutGridItem .layoutGrid {
+  margin-bottom: 0px;
+}
+
+.gridLabel {
+  position: relative;
+  max-width: var(--max-content-width);
+  color: rgb(var(--white));
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 2px 0;
+  background-color: rgba(var(--black), 0.5);
+}
+
+/* content components */
+.header,
+.footer {
+  position: relative;
+  max-width: var(--max-content-width);
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.header {
+  color: rgb(var(--white));
+  background-color: rgb(var(--black));
+}
+
+.footer {
+  background-color: rgba(var(--black), 0.2);
+  color: rgb(var(--black));
+}
+
+#externalAd {
+  height: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#externalAd .Ad {
+  position: absolute;
+  right: calc(-160px - var(--column-spacing) * 2);
+  top: 0px;
+  width: 160px;
+  height: 600px;
+  background-color: var(--yellow);
+  text-align: left;
+}
+
+#heroImage {
+  height: 200px;
+}
+
+#searchForm {
+  position: absolute;
+  bottom: 75px;
+  height: 75px;
+  width: 100%;
+  background-color: var(--blue);
+}
+
+.block {
+  background-color: rgba(var(--white), 0.3);
+  padding: 16px 0;
+  min-height: 50px;
+}
+
+.full-width-block {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.block p {
+  margin: 0 0 8px 0;
+}
+
+.block span.message {
+  background-color: rgba(var(--white), 0.5);
+}
+
+.block > *:last-child,
+.section > *:last-child {
+  margin-bottom: 0;
+}
+
+.default-block > *,
+.full-width-block > * {
+  margin-bottom: var(--block-spacing-vertical);
+}
+
+.default-block > *:last-child,
+.full-width-block > *:last-child {
+  margin-bottom: 0;
+}
+
+.widthOutput {
+  border-top: 1px dotted rgba(var(--black), 0.5);
+  position: relative;
+  top: 7px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 0 0 4px;
+}
+.widthOutput span {
+  position: relative;
+  top: -7px;
+  background-color: rgba(var(--white), 0.6);
+}
+
+#composite-block .block {
+  margin-bottom: var(--block-spacing-vertical);
+}
+
+#composite-block .layoutGrid .block {
+  margin-bottom: 0px;
+}
+
+/* visibility widget */
+
+.widgets {
+  position: fixed;
+  z-index: 100;
+  top: 10px;
+  opacity: 0.1;
+  transition: opacity 0.2s;
+  text-align: left;
+  padding: 6px;
+  border: 1px dotted black;
+  background-color: rgba(var(--white), 0.75);
+  border-radius: 0px 12px 12px 0px;
+}
+
+.widgets:hover {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+#widget {
+  margin: 6px;
+  border-radius: 12px;
+  border: 1px solid rgba(var(--black), 0.5);
+  background-color: rgba(var(--black), 0.1);
+  padding: 6px;
+}
+
+#widget label {
+  display: block;
+  text-align: left;
+  padding: 4px 4px 4px 0;
+}
+
+#widget button {
+  margin-top: 6px;
+}
+
+#BackLink,
+#debugButton,
+#expandButton {
+  box-sizing: content-box;
+  text-align: left;
+  display: block;
+  padding: 6px;
+  margin: 8px;
+  width: 100px;
+  background-color: rgb(var(--white));
+  border-radius: 4px;
+  border: 1px solid rgb(var(--black));
+}
+
+.layout .UseCase.collapsed {
+  margin-bottom: 0px;
+}
+
+#BackLink:hover,
+#debugButton:hover,
+#expandButton:hover,
+.UseCase .note:hover {
+  cursor: pointer;
+}
+
+#BackLink a {
+  display: inline;
+}
+
+/* colors */
+
+#grid-1 .section,
+#grid-single .section,
+#grid-25-25-25-25 .section {
+  background-color: var(--red);
+}
+
+#grid-2 .section,
+#grid-50-50 .section,
+#grid-25-50-25 .section {
+  background-color: var(--blue);
+}
+
+#composite-block,
+#grid-3 .section,
+#grid-33-66 .section {
+  background-color: var(--yellow);
+}
+
+#grid-4 .section,
+#grid-floating .section,
+.section #_nested-grid-50-50 .section,
+#grid-66-33 .section {
+  background-color: var(--purple);
+}
+
+#grid-5 .section,
+#grid-33-33-33 .section,
+#grid-3c-fill .section {
+  background-color: var(--green);
+}
